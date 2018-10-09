@@ -1,0 +1,7 @@
+poczatek gry
+jestes grzybiarzem, idziesz do lasu w Lipowie, wychodzisz z dzialki, idziesz blotnista droga, 
+mijasz otwarta brame i stajeszcze przed wyborem:
+
+wchodzisz do lasu po prawej, lub po lewej stronie drogi?
+1. ide w lewo, przebijasz sie przez zarosla
+2. ide w prawo, zaczynasz piac sie na pagorek
