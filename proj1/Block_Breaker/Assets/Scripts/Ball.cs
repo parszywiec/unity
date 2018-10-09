@@ -7,15 +7,20 @@ public class Ball : MonoBehaviour {
     // config params
     [SerializeField] Podstawka paddle1;
     [SerializeField] float xPush = 2f, yPush = 15f;
+    [SerializeField] AudioClip[] ballSounds;
 
-    //state
+    // state
     Vector2 podstawkaDoKuliVector;
     // powinna byc inicjowana w "Start" - mam nadzieje, ze do tego wroce ;)
     bool hasStarted = false;
 
+    // cached component
+    AudioSource myAudioSource;
+
 	// Use this for initialization
 	void Start () {
         podstawkaDoKuliVector = transform.position - paddle1.transform.position;
+        myAudioSource = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -45,4 +50,13 @@ public class Ball : MonoBehaviour {
             hasStarted = true;
         }
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (hasStarted)
+        {
+            AudioClip clip = ballSounds[UnityEngine.Random.Range(0, ballSounds.Length)];
+            myAudioSource.PlayOneShot(clip);
+        }
+    }
+
 }
