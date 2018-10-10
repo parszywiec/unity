@@ -4,9 +4,29 @@ using UnityEngine;
 
 public class BlockKursowy : MonoBehaviour {
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    [SerializeField] AudioClip destroySound;
+
+    // cached reference
+    Level level;
+
+
+    private void Start()
     {
-        Destroy(gameObject);
+        level = FindObjectOfType<Level>();
+        level.SumOfBreakableBlcks();
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        DestoryBlock();
+    }
+
+    private void DestoryBlock()
+    {
+        AudioSource.PlayClipAtPoint(destroySound, Camera.main.transform.position);
+        Destroy(gameObject);
+        level.BlockDestoyed();
+        // odwolanie odrazu do innego obieku z tej gry
+        FindObjectOfType<GameStatus>().addToScore();        
+    }
 }
