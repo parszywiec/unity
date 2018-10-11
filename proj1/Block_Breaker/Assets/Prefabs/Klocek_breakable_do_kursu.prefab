@@ -80,7 +80,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destroySound: {fileID: 8300000, guid: 94e778fec204ed94fa3e4b2fefef401e, type: 3}
   blockSparklesVFX: {fileID: 100000, guid: 7d846c02296ef4dc4abff04ce3e5262c, type: 2}
-  maxHits: 3
+  maxHits: 1
   hitSprites: []
   hitsRecived: 0
 --- !u!212 &212992897729277088

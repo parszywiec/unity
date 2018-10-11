@@ -8,7 +8,7 @@ public class BlockKursowy : MonoBehaviour {
     // config params
     [SerializeField] AudioClip destroySound;
     [SerializeField] GameObject blockSparklesVFX;
-    [SerializeField] int maxHits;
+    //[SerializeField] int maxHits;  // w kursie przeniesione do metody HandleHit() i inicjowane jako dlugosc listy ze spritami +1, bo 1 sprite jest zainicjowany osobno w "Sprite Renderze"!
     [SerializeField] Sprite[] hitSprites;
 
     // cached reference
@@ -43,6 +43,8 @@ public class BlockKursowy : MonoBehaviour {
     private void HandleHit()
     {
         hitsRecived++;
+        // niby lepsza wersja przypisania ilosci hit pointow na podstawie ilosci spritow, a wiec ile razy go zmienimy tyle bedzie hit pointow miec klocek
+        int maxHits = hitSprites.Length + 1;
         if (maxHits <= hitsRecived)
         {
             DestoryBlock();
@@ -60,8 +62,12 @@ public class BlockKursowy : MonoBehaviour {
         // wtedy hitsRecived beda -1 tak jak w kursie !!! 
         // toDo!
         // kolejna sprawa dodatkowe tagi sa zbedne, maxHitsy po prostu ustawiam na inna wartosc... da...
-        int spriteIndex = hitsRecived;
-        GetComponent<SpriteRenderer>().sprite = hitSprites[spriteIndex];
+        // poprawki zrobione - komenatrz zostawiam dla potomnych...
+        int spriteIndex = hitsRecived-1;
+        if (hitSprites[spriteIndex] != null)
+            GetComponent<SpriteRenderer>().sprite = hitSprites[spriteIndex];
+        else
+            Debug.LogError("Block sprite is missing from array (its name - " + gameObject.name + ")");
     }
 
     private void DestoryBlock()

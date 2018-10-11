@@ -8,6 +8,7 @@ public class Ball : MonoBehaviour {
     [SerializeField] Podstawka paddle1;
     [SerializeField] float xPush = 2f, yPush = 15f;
     [SerializeField] AudioClip[] ballSounds;
+    [SerializeField] float randomnessCollision = 0.2f;
 
     // state
     Vector2 podstawkaDoKuliVector;
