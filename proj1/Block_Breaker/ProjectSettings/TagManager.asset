@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Breakable
+  - Unbreakable
+  - Breakable2h
+  - Breakable3h
   layers:
   - Default
   - TransparentFX

@@ -12,6 +12,9 @@ public class SceneLoader : MonoBehaviour {
     }
     public void LoadStartScene()
     {
+        // odwolanie do obiektu i jego metod, bez inicjowania zmiennej itd !!!!! 
+        // MEGA IMPORTANTE RZECZ!!! <-
+        FindObjectOfType<GameSession>().DestoryItself();
         SceneManager.LoadScene(0);
     }
     public void Quit()
