@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Ball : MonoBehaviour {
 
@@ -17,11 +15,15 @@ public class Ball : MonoBehaviour {
 
     // cached component
     AudioSource myAudioSource;
+    Rigidbody2D myRigidBody2D;
 
 	// Use this for initialization
 	void Start () {
         podstawkaDoKuliVector = transform.position - paddle1.transform.position;
+        // w sumie zwykle przypisanie do zmiennej, mozna tez wywolac obiekt w ten sposob, bez zmiennej,
+        // jak bylo w metodzie LaunchOnMouseClick()
         myAudioSource = GetComponent<AudioSource>();
+        myRigidBody2D = GetComponent<Rigidbody2D>();
 	}
 	
 	// Update is called once per frame
@@ -47,16 +49,26 @@ public class Ball : MonoBehaviour {
         if (Input.GetMouseButtonDown(0))
         {
             // jak napisane w nazwie metody, polecenie poniezej startuje kule
-            GetComponent<Rigidbody2D>().velocity = new Vector2(xPush, yPush);
+//             GetComponent<Rigidbody2D>().velocity = new Vector2(xPush, yPush);
+            // powyzej stara wersja, ponizej nowa, w zwiazku z lektura 76, stworzylem zmienna, ktora moge
+            // podmienic jako GetComp, zeden wow, ale przydatne do zapamietania
+            myRigidBody2D.velocity = new Vector2(xPush, yPush);
             hasStarted = true;
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        float x = Random.Range(0f, randomnessCollision);
+        Vector2 velocityTweak = new Vector2(x, x);
         if (hasStarted)
         {
+            // kolejna wskazowka na przyszlosc UnityEngine. itd wybiera z ktorej biblioteki metode uzywamy
+            // poniewaz wycialem usingi systemowe, nie jest to potrzebne, ale zostawiam dla potomnych
+            // powyzej Random uzywam bez tego ...
             AudioClip clip = ballSounds[UnityEngine.Random.Range(0, ballSounds.Length)];
             myAudioSource.PlayOneShot(clip);
+            // velocity - wazna czesc - w sensie czesto do niej sie odwoluje...
+            myRigidBody2D.velocity += velocityTweak;
         }
     }
 

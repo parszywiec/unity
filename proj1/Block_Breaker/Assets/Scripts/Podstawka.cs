@@ -8,10 +8,17 @@ public class Podstawka : MonoBehaviour {
     [SerializeField] float minX = 0.5f, maxX = 15.5f;
     [SerializeField] float widthInUnits; // 16f - wartosc domyslna powinna byc, do zapamietania, ze mozna bez
 
-	// Use this for initialization
-	void Start () {
-		
-	}
+    // cached references
+    GameSession gameSession;
+    Ball ball;
+
+
+    // Use this for initialization
+    void Start () {
+        gameSession = FindObjectOfType<GameSession>();
+        ball = FindObjectOfType<Ball>();
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -24,11 +31,28 @@ public class Podstawka : MonoBehaviour {
                 // przestawi paletke na podane wartosci!
                 transform.position = paddlePosit;
         */
+        /* wersja poprzednia, bez autopilota 
+            float mousePositionX = Input.mousePosition.x / Screen.width * widthInUnits;
+            Vector2 paddlePosit = new Vector2(transform.position.x, transform.position.y);
+            paddlePosit.x = Mathf.Clamp(mousePositionX, minX, maxX); //ogranicza zakres, w tym wypadku x
+            transform.position = paddlePosit;
+        */
 
-        float mousePositionX = Input.mousePosition.x / Screen.width * widthInUnits;
         Vector2 paddlePosit = new Vector2(transform.position.x, transform.position.y);
-        paddlePosit.x = Mathf.Clamp(mousePositionX, minX, maxX); //ogranicza zakres, w tym wypadku x
+        paddlePosit.x = Mathf.Clamp(GetXPos(), minX, maxX); //ogranicza zakres, w tym wypadku x
         transform.position = paddlePosit;
 
+    }
+
+    private float GetXPos()
+    {
+        if (gameSession.IsAutoPlayEnabled())
+        {
+            return ball.transform.position.x;
+        }
+        else
+        {
+            return Input.mousePosition.x / Screen.width * widthInUnits;
+        }
     }
 }
