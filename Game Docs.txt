@@ -1,0 +1,5 @@
+w momencie planowania feature'ow nowych stworz doca z punktami
+core (niezbedne) , seconday (fajne dodatki), polish (sie w stopê...)
+1st oczywiscie cory, wiec czasowo odrzuc pozostale
+podziel cory na te ktore mozesz juz testowac i ktore nie np laser defender nie potrzebny jest player hp
+i enemy hp skoro nie mamy jeszcze strzelania (lektura 87 kurs 2d)
