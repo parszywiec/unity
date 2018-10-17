@@ -21,7 +21,9 @@ GameObject:
   - component: {fileID: 4052744067906944}
   - component: {fileID: 212410758789316542}
   - component: {fileID: 114623785192845294}
-  m_Layer: 0
+  - component: {fileID: 114582815617424784}
+  - component: {fileID: 58713118459281402}
+  m_Layer: 10
   m_Name: Enemy 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35,12 +37,44 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1381144309181594}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4, z: 0}
+  m_LocalPosition: {x: 0, y: 6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &58713118459281402
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1381144309181594}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0038571954, y: -0.011571407}
+  serializedVersion: 2
+  m_Radius: 0.45828468
+--- !u!114 &114582815617424784
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1381144309181594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7e5d08c2f49e2241b0204cff35ffa51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 1000
+  shotCounter: 0
+  minTimeBetweenShots: 0.2
+  maxTimeBetweenShots: 3
+  enemyLaser: {fileID: 1180666653948780, guid: 8b6d2b35ceb1b7e48a1722c2c0b8423e, type: 2}
+  projectileSpeed: 5
 --- !u!114 &114623785192845294
 MonoBehaviour:
   m_ObjectHideFlags: 1

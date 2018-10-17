@@ -5,9 +5,12 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 
+    [Header("Player")] // tworzy naglowek dla pol, jak wskazuje nazwa
     [SerializeField] float moveSpeed = 10f;
     // zmienna okresla jak daleko od granicy ekranu moze byc nasz "samolot" (obiekt player)
     [SerializeField] float padding = 0.5f;
+    [SerializeField] int health = 200;
+    [Header("Projectile")]
     [SerializeField] GameObject playerLaser;
     [SerializeField] float projectileSpeed = 10f;
     [SerializeField] float projectileFiringPeriod = 0.1f;
@@ -31,18 +34,39 @@ public class Player : MonoBehaviour {
 
     }
 
+    // sa dwie metody Trigger i Collider
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        // tworzenie obiektu typu DamageDealer - ktory na razie jest laserem, ktory trafil w cos i start metody ponizej
+        DamageDealer damageDealer = collision.gameObject.GetComponent<DamageDealer>();
+        GotHit(damageDealer);
+    }
+
+    private void GotHit(DamageDealer damageDealer)
+    {
+        health -= damageDealer.GetDamage();
+        damageDealer.Hit();
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     private void Fire()
     {
+        // strzelanie w sposob ciagly
         if (Input.GetButtonDown("Fire1"))
         {
             firingCoroutine = StartCoroutine(FireContinuously());
         }
+        // koniec strzelania, gdy button idzie w gore, czyli w tym wypadku gdy puszczam spacje
         if (Input.GetButtonUp("Fire1"))
         {
             StopCoroutine(firingCoroutine);
         }
     }
 
+    // metoda typu Coroutine, czyli taka ktora sie wykonuje do spelnienia yielda
     IEnumerator FireContinuously()
     {
         while (true)
@@ -55,11 +79,13 @@ public class Player : MonoBehaviour {
 
     private void Move()
     {
+        // poruszanie sie horyzontalne(poziom / x) i verticalne (pionowe / y)
         // Time.deltaTime podaje ile czasu trwal ostatni frame (fps)
         var deltaX = Input.GetAxis("Horizontal") * Time.deltaTime * moveSpeed;
         var deltaY = Input.GetAxis("Vertical") * Time.deltaTime * moveSpeed;
         // Debug.Log(deltaX);
-        // dobra funkcja/metoda - pamietaj o niej... (Mathf.Clamp) daa!
+        // dobra funkcja/metoda - pamietaj o niej... (Mathf.Clamp) daa! 
+        // w SetUpMove... przypisywane wartosci, za ktore nie mozna wyjsc, dzieki metodzie
         var newXPosit = Mathf.Clamp(transform.position.x + deltaX, xMin, xMax);
         var newYPosit = Mathf.Clamp(transform.position.y + deltaY, yMin, yMax);
         transform.position = new Vector2 (newXPosit, newYPosit);

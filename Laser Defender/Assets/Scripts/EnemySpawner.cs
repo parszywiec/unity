@@ -8,15 +8,18 @@ public class EnemySpawner : MonoBehaviour {
     [SerializeField] int startingWave = 0;
     [SerializeField] bool looping = false;
 
-	// Use this for initialization
-	IEnumerator Start ()
+    // Use this for initialization
+    // Coroutine metody Start - pewnie bede to wykorzystywac, wiec warto pamietac
+    IEnumerator Start ()
     {
         do
         {
+            // Coroutine wywoluje metode Coroutinowa
             yield return StartCoroutine(SpawnAllWaves());
         } while (looping);
 	}
 
+    // loop w loopie
     private IEnumerator SpawnAllWaves()
     {
         for (int wavesIndex = 0; wavesIndex < waveConfigs.Count; wavesIndex++)
@@ -26,7 +29,8 @@ public class EnemySpawner : MonoBehaviour {
 
         }
     }
-	
+
+	// loop w loopie loopie :)
     private IEnumerator SpawnAllEnemiesInWave(WaveConfig waveConfig)
     {
         for (int enemyCount = startingWave; enemyCount < waveConfig.GetNumberOfEnemies(); enemyCount++)
