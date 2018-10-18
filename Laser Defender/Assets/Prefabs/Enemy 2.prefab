@@ -75,6 +75,10 @@ MonoBehaviour:
   maxTimeBetweenShots: 3
   enemyLaser: {fileID: 1180666653948780, guid: 8b6d2b35ceb1b7e48a1722c2c0b8423e, type: 2}
   projectileSpeed: 5
+  ExplosionVFX: {fileID: 1382903927863316, guid: 21f0fc0065d009c489a5805bfd80a5c4,
+    type: 2}
+  laserSound: {fileID: 8300000, guid: 8782ce86d2dfc444c9b5838a6511f67e, type: 3}
+  destroySound: {fileID: 8300000, guid: 92f7127069ea3c2468c222304af3fcb0, type: 3}
 --- !u!114 &114623785192845294
 MonoBehaviour:
   m_ObjectHideFlags: 1

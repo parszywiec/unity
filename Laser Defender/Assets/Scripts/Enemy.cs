@@ -10,9 +10,15 @@ public class Enemy : MonoBehaviour {
     [SerializeField] float maxTimeBetweenShots = 3f;
     [SerializeField] GameObject enemyLaser;
     [SerializeField] float projectileSpeed = 10f;
+    [SerializeField] GameObject ExplosionVFX;
+    [Header("Sounds")]
+    [SerializeField] AudioClip laserSound;
+    [SerializeField] [Range(0, 1)] float laserVolume = 0.3f;
+    [SerializeField] AudioClip destroySound;
+    [SerializeField] [Range(0, 1)] float destroyVolume = 0.8f;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         shotCounter = Random.Range(minTimeBetweenShots, maxTimeBetweenShots);
 	}
 	
@@ -27,9 +33,11 @@ public class Enemy : MonoBehaviour {
         shotCounter -= Time.deltaTime;
         if (shotCounter <= 0f)
         {
+            
             Fire();
             // inicjacja za ile kolejny strzal, ktory wykonuje sie w Fire() - dajemu mu ponownie wartosc, aby nie strzelal bez przerwy
             shotCounter = Random.Range(minTimeBetweenShots, maxTimeBetweenShots);
+            // PlayEnemyShootingSFK();
         }
     }
 
@@ -39,6 +47,7 @@ public class Enemy : MonoBehaviour {
         GameObject laser = Instantiate(enemyLaser, transform.position, Quaternion.identity) as GameObject;
         // velocity gdzie leca w tym wypadku naboje 0 na y, ujemne wartosci na x leca w dol
         laser.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -projectileSpeed);
+        PlayEnemyShootingSFK();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -59,6 +68,23 @@ public class Enemy : MonoBehaviour {
         if (health <= 0)
         {
             Destroy(gameObject);
+            PlayEnemyDestorySFK();
+            TriggerExplosionVFX();
         }
+    }
+    private void TriggerExplosionVFX()
+    {
+        GameObject explosion = Instantiate(ExplosionVFX, transform.position, Quaternion.identity);
+        Destroy(explosion, 2f);
+    }
+
+    private void PlayEnemyShootingSFK()
+    {
+        AudioSource.PlayClipAtPoint(laserSound, Camera.main.transform.position, laserVolume);
+    }
+
+    private void PlayEnemyDestorySFK()
+    {
+        AudioSource.PlayClipAtPoint(destroySound, Camera.main.transform.position, destroyVolume);
     }
 }

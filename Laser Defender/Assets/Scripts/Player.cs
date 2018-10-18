@@ -14,6 +14,11 @@ public class Player : MonoBehaviour {
     [SerializeField] GameObject playerLaser;
     [SerializeField] float projectileSpeed = 10f;
     [SerializeField] float projectileFiringPeriod = 0.1f;
+    [Header("Sounds")]
+    [SerializeField] AudioClip laserSound;
+    [SerializeField] [Range(0, 1)] float laserVolume = 0.1f;
+    [SerializeField] AudioClip destroySound;
+    [SerializeField] [Range(0, 1)] float destroyVolume = 1f;
 
     Coroutine firingCoroutine;
 
@@ -49,6 +54,7 @@ public class Player : MonoBehaviour {
         if (health <= 0)
         {
             Destroy(gameObject);
+            PlayPlayerDestorySFK();
         }
     }
 
@@ -73,6 +79,7 @@ public class Player : MonoBehaviour {
         {
             GameObject laser = Instantiate(playerLaser, transform.position, Quaternion.identity) as GameObject;
             laser.GetComponent<Rigidbody2D>().velocity = new Vector2(0, projectileSpeed);
+            PlayPlayerShootingSFK();
             yield return new WaitForSeconds(projectileFiringPeriod);
         }
     }
@@ -105,12 +112,22 @@ public class Player : MonoBehaviour {
         yMax = gameCamera.ViewportToWorldPoint(new Vector3(0, 1, 0)).y - padding;
     }
 
-/* // Playin with Coroutine
-    private IEnumerator WaitForThreeSec()
+    private void PlayPlayerDestorySFK()
     {
-        Debug.Log(Time.time);
-        yield return new WaitForSeconds(3);
-        Debug.Log(Time.time);
+        AudioSource.PlayClipAtPoint(destroySound, Camera.main.transform.position, destroyVolume);
     }
-*/
-}
+    
+    private void PlayPlayerShootingSFK()
+    {
+        AudioSource.PlayClipAtPoint(laserSound, Camera.main.transform.position, laserVolume);
+    }
+
+        /* // Playin with Coroutine
+            private IEnumerator WaitForThreeSec()
+            {
+                Debug.Log(Time.time);
+                yield return new WaitForSeconds(3);
+                Debug.Log(Time.time);
+            }
+        */
+    }
