@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour {
     [SerializeField] GameObject enemyLaser;
     [SerializeField] float projectileSpeed = 10f;
     [SerializeField] GameObject ExplosionVFX;
+    [SerializeField] int ScoreForEnemy = 100;
     [Header("Sounds")]
     [SerializeField] AudioClip laserSound;
     [SerializeField] [Range(0, 1)] float laserVolume = 0.3f;
@@ -68,6 +69,7 @@ public class Enemy : MonoBehaviour {
         if (health <= 0)
         {
             Destroy(gameObject);
+            FindObjectOfType<GameSession>().AddToScore(ScoreForEnemy);
             PlayEnemyDestorySFK();
             TriggerExplosionVFX();
         }

@@ -53,9 +53,15 @@ public class Player : MonoBehaviour {
         damageDealer.Hit();
         if (health <= 0)
         {
-            Destroy(gameObject);
-            PlayPlayerDestorySFK();
+            Death();
         }
+    }
+
+    private void Death()
+    {
+        FindObjectOfType<Level>().LoadGameOver();
+        Destroy(gameObject);
+        PlayPlayerDestorySFK();
     }
 
     private void Fire()
@@ -122,12 +128,12 @@ public class Player : MonoBehaviour {
         AudioSource.PlayClipAtPoint(laserSound, Camera.main.transform.position, laserVolume);
     }
 
-        /* // Playin with Coroutine
-            private IEnumerator WaitForThreeSec()
-            {
-                Debug.Log(Time.time);
-                yield return new WaitForSeconds(3);
-                Debug.Log(Time.time);
-            }
-        */
+/*    // Playin with Coroutine
+    private IEnumerator WaitForThreeSec()
+    {
+        // Debug.Log(Time.time);
+        yield return new WaitForSeconds(3);
+        // Debug.Log(Time.time);
     }
+*/        
+}
