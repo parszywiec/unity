@@ -68,8 +68,8 @@ public class Enemy : MonoBehaviour {
         damageDealer.Hit();
         if (health <= 0)
         {
+            FindObjectOfType<SesjaGry>().AddToScore(ScoreForEnemy);
             Destroy(gameObject);
-            FindObjectOfType<GameSession>().AddToScore(ScoreForEnemy);
             PlayEnemyDestorySFK();
             TriggerExplosionVFX();
         }

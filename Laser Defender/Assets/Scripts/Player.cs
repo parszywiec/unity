@@ -128,6 +128,11 @@ public class Player : MonoBehaviour {
         AudioSource.PlayClipAtPoint(laserSound, Camera.main.transform.position, laserVolume);
     }
 
+    public int GetPlayerHealth()
+    {
+        return health;
+    }
+
 /*    // Playin with Coroutine
     private IEnumerator WaitForThreeSec()
     {

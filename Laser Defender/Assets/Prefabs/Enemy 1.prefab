@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7e5d08c2f49e2241b0204cff35ffa51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 500
+  health: 300
   shotCounter: 0
   minTimeBetweenShots: 0.2
   maxTimeBetweenShots: 3
@@ -111,6 +111,7 @@ MonoBehaviour:
   projectileSpeed: 5
   ExplosionVFX: {fileID: 1382903927863316, guid: 21f0fc0065d009c489a5805bfd80a5c4,
     type: 2}
+  ScoreForEnemy: 100
   laserSound: {fileID: 8300000, guid: 69eb194043cdb474987fd5e4d5cbdf52, type: 3}
   laserVolume: 0.3
   destroySound: {fileID: 8300000, guid: 92f7127069ea3c2468c222304af3fcb0, type: 3}
