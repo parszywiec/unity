@@ -910,6 +910,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1cac98f110973e4daf8d831c70c5f20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectSpeed: 1
-  resetPostion: 0
-  startPostion: 0
+  objectSpeed: 1.5
+  resetPosition: -57.92655
+  startPosition: 98.07359
