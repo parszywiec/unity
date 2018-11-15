@@ -16,12 +16,15 @@ public class MovingObject : MonoBehaviour {
 
     private void MoveLeft()
     {
-        transform.Translate(Vector3.left * objectSpeed * Time.deltaTime);
-        if(transform.localPosition.x <= resetPosition)
+        if (GameManager.Instance.PlayerActive)
         {
-            Vector3 newPosition = new Vector3(startPosition, transform.position.y, transform.position.z);
-            //Vector3 newPosition = new Vector3(poprawnaStartPozycja + transform.position.x, transform.position.y, transform.position.z);
-            transform.position = newPosition;
+            transform.Translate(Vector3.left * objectSpeed * Time.deltaTime);
+            if (transform.localPosition.x <= resetPosition)
+            {
+                Vector3 newPosition = new Vector3(startPosition, transform.position.y, transform.position.z);
+                //Vector3 newPosition = new Vector3(poprawnaStartPozycja + transform.position.x, transform.position.y, transform.position.z);
+                transform.position = newPosition;
+            }
         }
     }
 }
