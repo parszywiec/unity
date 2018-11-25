@@ -47,3 +47,18 @@ TagManager:
   - name: Roads
     uniqueID: 2892216041
     locked: 0
+  - name: Trees
+    uniqueID: 1358275347
+    locked: 0
+  - name: Fences
+    uniqueID: 2177012503
+    locked: 0
+  - name: Buildings
+    uniqueID: 2404151345
+    locked: 0
+  - name: Extras
+    uniqueID: 1189963967
+    locked: 0
+  - name: Enemies
+    uniqueID: 24051529
+    locked: 0
